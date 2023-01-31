@@ -6,28 +6,30 @@
         {
             Console.WriteLine("Hello, please enter a word");
             string userWord = Console.ReadLine();
-            int length = userWord.Length - 1;
-            char[] arr = new char[length];
-            
-            FibonaciCalculations(arr, 0, length-1);
+            int length = userWord.Length;
+            char[] arr = userWord.ToCharArray();
 
-            Console.WriteLine(string.Join(',', arr));
+            char[] result = ReverseString(arr, 0, length - 1);
+
+            Console.WriteLine(new string(result));
         }
 
-       
-        static char[] FibonaciCalculations(char[] arr, int start, int end)
+
+        static char[] ReverseString(char[] arr, int start, int end)
         {
-            while (start != end)
+            if (start >= end)
             {
-                char temp = arr[end];
-                arr[end] = arr[start];
-                arr[start] = temp;
-
-                FibonaciCalculations(arr, start + 1, end - 1);
-
-
+                return arr;
             }
-            return arr;
+            else
+            {
+                char temp = arr[start];
+                arr[start] = arr[end];
+                arr[end] = temp;
+
+                ReverseString(arr, start + 1, end - 1);
+                return arr;
+            }
         }
     }
 }
